@@ -1,15 +1,18 @@
 class Taxation:
     def __init__(self,commodity):
         self.commodity=commodity
-
-
+        
+    
     def taxables(self):
+
         imported=False
         exempt=False
-        exempted=['book','chocolate','pills']
+        
         count=int(self.commodity[0])
         price=float(self.commodity[len(self.commodity)-1])
         value=' '.join(self.commodity[1:(len(self.commodity)-2)])
+
+        exempted=['book','chocolate','pills']
 
         for i in exempted:
             if i in value:
@@ -22,6 +25,7 @@ class Taxation:
         print(f'{count} {value}: {self.round_off(ans[0])}')
         return ans
 
+
     def solve(self,price,count,value,imported,exempt):
         sales_tax=price*(0.1 if not exempt else 0)+price*(0.05 if imported else 0)
         total=(price+sales_tax)*count
@@ -30,18 +34,14 @@ class Taxation:
         return total,tot_sales_tax
 
    
-    
-
     def round_off(self,n):
         x= n*100
         x=round(x)
         r=x%10
         if r>5:
             return round((x/100),2)
-            
         else:
             return round(((x+(5-r))/100),2)
-
 
 
 total=0
